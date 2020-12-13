@@ -7,12 +7,16 @@ class TOCBuilder:
     ITEM_INDENT = "  "
     SECTION_JOINT = "-"
     SECTION_PREFIX = "sec"
+    CODE_BLOCK_CHAR = "```"
 
     def __init__(self, in_file: typing.TextIO, out_file: typing.TextIO,
-                 level: int) -> None:
+                 level: int, to_embed: str, exclude_symbol: str) -> None:
         self.in_file = in_file
         self.out_file = out_file
         self.upper_level = level
+        self.to_embed = to_embed
+        self.exclude_symbol = exclude_symbol
+        self.is_code_block = False
         self.section_counter_list = [0] * self.upper_level
         self.toc_item_list = []
         self.new_contents_list = []
@@ -21,12 +25,20 @@ class TOCBuilder:
 
     def build(self) -> None:
         for line in self.in_file:
+            if self._is_code_block(line):
+                self.new_contents_list.append(line)
+                continue
+
             if not self._is_header(line):
                 self.new_contents_list.append(line)
                 continue
 
             level = self._detect_level(line)
             if level > self.upper_level:
+                self.new_contents_list.append(line)
+                continue
+
+            if self._has_exclude_comment(line):
                 self.new_contents_list.append(line)
                 continue
 
@@ -38,17 +50,25 @@ class TOCBuilder:
 
             self._append_toc_row(title, section, level)
 
-        self.toc = "\n".join(self.toc_item_list)
+        self.toc = "\n".join(self.toc_item_list) + "\n"
         self.new_contents = "".join(self.new_contents_list)
 
-        # TODO: be able to chose place to insert TOC
-        self.new_contents = self.toc + "\n\n" + self.new_contents
+        self._embed_toc()
 
     def write(self) -> None:
         self.out_file.write(self.new_contents)
 
+    def _is_code_block(self, line: str) -> bool:
+        if self.CODE_BLOCK_CHAR in line:
+            self.is_code_block = not self.is_code_block
+
+        return self.is_code_block
+
     def _is_header(self, line: str) -> bool:
         return line.startswith(self.HEADER_CHAR)
+
+    def _has_exclude_comment(self, line: str) -> bool:
+        return self.exclude_symbol in line
 
     def _detect_level(self, line: str) -> int:
         level = 0
@@ -84,3 +104,6 @@ class TOCBuilder:
 
     def _make_section_tag(self, section: str) -> str:
         return f"<a id=\"{section}\"></a>\n"
+
+    def _embed_toc(self) -> None:
+        self.new_contents = self.new_contents.replace(self.to_embed, self.toc)

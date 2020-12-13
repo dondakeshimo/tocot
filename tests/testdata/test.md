@@ -1,17 +1,28 @@
+[TOC]
 # test
 これはテスト
 
+### 1-3
 
-### test1-0-3
+## 日本語のテスト
 
-## test 1-1-0
+####fjeiao
 
-#### test 1-1-0-1
+# exclude <!-- exclude-toc -->
+exclude
+
+```
+# exclude
+```
 
 
+fjeiaowka
 # test2
 
 # test3
 
 
-#### test 3-0-0-0-5
+#### 深いやつ
+
+
+##### さらに深いやつ

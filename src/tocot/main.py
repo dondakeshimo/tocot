@@ -21,8 +21,12 @@ def validate_level(ctx, param, value):
 @click.argument("out_file", type=click.File("w"))
 @click.option("--level", "-l", callback=validate_level, default=2,
               show_default=True, type=int)
-def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int) -> None:
-    builder = TOCBuilder(in_file, out_file, level)
+@click.option("--to_embed", "-e", default="[TOC]", show_default=True, type=str)
+@click.option("--exclude_symbol", default="exclude-toc", show_default=True,
+              type=str)
+def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int,
+        to_embed: str, exclude_symbol: str) -> None:
+    builder = TOCBuilder(in_file, out_file, level, to_embed, exclude_symbol)
     builder.build()
     builder.write()
 
