@@ -1,0 +1,40 @@
+name: Python poetry lint test build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Set up poetry
+      uses: abatilo/actions-poetry@v2.0.0
+      with:
+        poetry-version: 1.0
+    - name: Install dependencies
+      run: poetry install
+    - name: Lint with yapf
+      run: |
+        lintyapf="$(poetry run yapf -dr ./src/tocot)"
+        if [ -z "lintyapf" ]; then exit 1; fi
+    - name: Test with pytest
+      run: |
+        poetry run pytest
+    - name: build
+      run: |
+        poetry build
