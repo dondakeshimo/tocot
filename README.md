@@ -1,7 +1,7 @@
 [![Python][python-test-image]][python-test-url]
 
 [python-test-image]: https://github.com/dondakeshimo/tocot/workflows/Python%20poetry%20lint%20test%20build/badge.svg
-[python-test-url]:   https://github.com/dondakeshimo/tocot/actions?query=workflow%3APython%20poetry%20lint%20test%20build
+[python-test-url]: https://github.com/dondakeshimo/tocot/actions?query=workflow%3A%22Python+poetry+lint+test+build%22
 
 # tocot
 Table Of Contents wO Tsukuru
