@@ -1,3 +1,8 @@
+"""main.
+
+main is controller for cli.
+
+"""
 import typing
 
 import click
@@ -6,6 +11,12 @@ from .toc_builder import TOCBuilder
 
 
 def validate_level(ctx, param, value):
+    """Validate level option.
+
+    validate level option.
+    level is greater than 0, and less than 6.
+
+    """
     level = value
 
     if level <= 0:
@@ -32,12 +43,22 @@ def validate_level(ctx, param, value):
               type=str)
 def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int,
         to_embed: str, exclude_symbol: str) -> None:
+    """Cmd.
+
+    cmd is a controller.
+
+    """
     builder = TOCBuilder(in_file, out_file, level, to_embed, exclude_symbol)
     builder.build()
     builder.write()
 
 
 def main():
+    """Vain.
+
+    main is a entrypoint.
+
+    """
     cmd()
 
 
