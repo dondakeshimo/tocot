@@ -1,10 +1,15 @@
+[![Python][python-test-image]][python-test-url]
+
+[python-test-image]: https://github.com/dondakeshimo/tocot/workflows/Python%20poetry%20lint%20test%20build/badge.svg
+[python-test-url]:   https://github.com/dondakeshimo/tocot/actions?query=workflow%3APython%20poetry%20lint%20test%20build
+
 # tocot
 Table Of Contents wO Tsukuru
 
 This script build a TOC for markdown
 
 # Required
-Python >= 3.6
+Python >= 3.7
 
 # Install
 ```
