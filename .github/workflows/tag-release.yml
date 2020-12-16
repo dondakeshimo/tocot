@@ -1,0 +1,35 @@
+name: Bump version Push release
+
+on:
+  push:
+    branches: [ master ]
+
+
+jobs:
+  tagging:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Extract version
+      id: project_version
+      run: |
+        version=$(grep -oP '(?<=version = ").*(?=")' pyproject.toml)
+        echo "::set-output name=project_version::${version}"
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v5.1
+      with:
+        # Required for permission to tag the repo.
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Custom tag name. If specified, it overrides bump settings.
+        custom_tag: ${{ steps.project_version.outputs.project_version }}
+    - name: Create a GitHub release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: ${{ steps.tag_version.outputs.changelog }}

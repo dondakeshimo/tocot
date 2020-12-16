@@ -19,10 +19,16 @@ def validate_level(ctx, param, value):
 @click.command()
 @click.argument("in_file", type=click.File("r"))
 @click.argument("out_file", type=click.File("w"))
-@click.option("--level", "-l", callback=validate_level, default=2,
-              show_default=True, type=int)
+@click.option("--level",
+              "-l",
+              callback=validate_level,
+              default=2,
+              show_default=True,
+              type=int)
 @click.option("--to_embed", "-e", default="[TOC]", show_default=True, type=str)
-@click.option("--exclude_symbol", default="exclude-toc", show_default=True,
+@click.option("--exclude_symbol",
+              default="exclude-toc",
+              show_default=True,
               type=str)
 def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int,
         to_embed: str, exclude_symbol: str) -> None:
