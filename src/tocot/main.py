@@ -43,9 +43,10 @@ def validate_level(ctx, param, value):
               type=str)
 def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int,
         to_embed: str, exclude_symbol: str) -> None:
-    """Cmd.
+    """Table Of Contents wO Tsukuru.
 
-    cmd is a controller.
+    tocot builds a table of contents in markdown.
+    Tsukuru (作る) means building.
 
     """
     builder = TOCBuilder(in_file, out_file, level, to_embed, exclude_symbol)
@@ -54,7 +55,7 @@ def cmd(in_file: typing.TextIO, out_file: typing.TextIO, level: int,
 
 
 def main():
-    """Vain.
+    """Main.
 
     main is a entrypoint.
 
