@@ -1,7 +1,19 @@
+"""toc builder.
+
+toc builder has business logic.
+
+"""
+
 import typing
 
 
 class TOCBuilder:
+    """TOC Builder class.
+
+    TOCBuilder is a class for main process.
+
+    """
+
     HEADER_CHAR = "#"
     ITEM_CHAR = "* "
     ITEM_INDENT = "  "
@@ -11,6 +23,11 @@ class TOCBuilder:
 
     def __init__(self, in_file: typing.TextIO, out_file: typing.TextIO,
                  level: int, to_embed: str, exclude_symbol: str) -> None:
+        """Initialize TOCBuilder.
+
+        constructor.
+
+        """
         self.in_file = in_file
         self.out_file = out_file
         self.upper_level = level
@@ -24,6 +41,11 @@ class TOCBuilder:
         self.new_contents = ""
 
     def build(self) -> None:
+        """Build Table of Contents.
+
+        build is a main function of this class to make TOC.
+
+        """
         for line in self.in_file:
             if self._is_code_block(line):
                 self.new_contents_list.append(line)
@@ -56,6 +78,11 @@ class TOCBuilder:
         self._embed_toc()
 
     def write(self) -> None:
+        """Write a markdown.
+
+        write a markdown file.
+
+        """
         self.out_file.write(self.new_contents)
 
     def _is_code_block(self, line: str) -> bool:

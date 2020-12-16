@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tocot"
-version = "0.1.6"
+version = "1.0.0"
 description = "Table Of Contents wO Tsukuru"
 readme = "README.md"
 license = "MIT"
@@ -15,6 +15,7 @@ pytest = "^5.2"
 flake8 = "^3.8.4"
 yapf = "^0.30.0"
 isort = "^5.6.4"
+flake8-docstrings = "^1.5.0"
 
 [tool.poetry.scripts]
 tocot = "tocot.main:main"
