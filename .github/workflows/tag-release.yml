@@ -19,8 +19,6 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # Custom tag name. If specified, it overrides bump settings.
         custom_tag: # optional
-        # Do not perform tagging, just calculate next version and changelog, then exit.
-        dry_run: true
     - name: Create a GitHub release
       uses: actions/create-release@v1
       env:
