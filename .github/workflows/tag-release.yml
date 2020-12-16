@@ -3,8 +3,6 @@ name: Bump version Push release
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 
 jobs:
