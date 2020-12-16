@@ -1,11 +1,17 @@
 {TOC-other}
 
+<a id="sec1"></a>
 # test
 これはテスト
 
+<a id="sec2"></a>
 # 目次
-[TOC]
+* [test](#sec1)
+* [目次](#sec2)
+* [level1](#sec3)
 
+
+<a id="sec3"></a>
 # level1
 ## level2
 ### level3
