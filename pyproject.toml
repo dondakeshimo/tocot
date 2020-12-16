@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tocot"
-version = "0.1.5"
+version = "0.1.6"
 description = "Table Of Contents wO Tsukuru"
 readme = "README.md"
 license = "MIT"
