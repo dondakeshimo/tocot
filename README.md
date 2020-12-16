@@ -34,6 +34,72 @@ You have to write "[TOC]" in your markdown file, then run below command, "[TOC]"
 $ tocot README.md new_README.md
 ```
 
+##### README.md
+```
+# test
+これはテスト
+
+# 目次
+[TOC]
+
+# level1
+## level2
+### level3
+#### level4
+##### level5
+###### level6
+
+## 日本語のテスト
+
+#### level3を飛ばす
+
+# exclude <!-- exclude-toc -->
+除外されるはず
+
+\```
+# exclude
+code blockの中なので無視される
+\```
+```
+
+##### new_README.md
+```
+<a id="sec1-0"></a>
+# test
+これはテスト
+
+<a id="sec2-0"></a>
+# 目次
+* [test](#sec1-0)
+* [目次](#sec2-0)
+* [level1](#sec3-0)
+  * [level2](#sec3-1)
+  * [日本語のテスト](#sec3-2)
+
+
+<a id="sec3-0"></a>
+# level1
+<a id="sec3-1"></a>
+## level2
+### level3
+#### level4
+##### level5
+###### level6
+
+<a id="sec3-2"></a>
+## 日本語のテスト
+
+#### level3を飛ばす
+
+# exclude <!-- exclude-toc -->
+除外される
+
+\```
+# exclude
+code blockの中なので無視される
+\```
+```
+
 If you want to change "[TOC]" to "table of contents template".
 ```
 $ tocot -e "table of contents template" README.md new_README.md
